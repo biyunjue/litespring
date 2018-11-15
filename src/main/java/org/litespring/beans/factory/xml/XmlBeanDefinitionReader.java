@@ -20,10 +20,10 @@ import java.util.Iterator;
  **/
 public class XmlBeanDefinitionReader {
 
-    public static final String ID_ATTRIBUTE = "id";
-    public static final String CLASS_ATTRIBUTE = "class";
+    private static final String ID_ATTRIBUTE = "id";
+    private static final String CLASS_ATTRIBUTE = "class";
 
-    BeanDefinitionRegistry registry;
+    private BeanDefinitionRegistry registry;
 
     public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
         this.registry = registry;
