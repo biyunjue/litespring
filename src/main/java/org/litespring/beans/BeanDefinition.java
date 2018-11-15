@@ -2,7 +2,7 @@ package org.litespring.beans;
 
 /**
  * @author yunfy
- * @create 2018-11-15 0:53
+ * @create 2018-11-15 22:53
  **/
 public interface BeanDefinition {
     /**

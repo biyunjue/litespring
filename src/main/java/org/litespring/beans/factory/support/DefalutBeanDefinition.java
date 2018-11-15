@@ -4,7 +4,7 @@ import org.litespring.beans.BeanDefinition;
 
 /**
  * @author yunfy
- * @create 2018-11-15 1:23
+ * @create 2018-11-15 23:23
  **/
 public class DefalutBeanDefinition implements BeanDefinition {
     public String id;

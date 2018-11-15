@@ -4,7 +4,7 @@ import org.litespring.beans.BeanDefinition;
 
 /**
  * @author yunfy
- * @create 2018-11-16 0:07
+ * @create 2018-11-16 23:07
  **/
 public interface BeanDefinitionRegistry {
     /**

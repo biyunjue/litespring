@@ -4,7 +4,7 @@ import org.litespring.beans.BeansException;
 
 /**
  * @author yunfy
- * @create 2018-11-15 1:41
+ * @create 2018-11-15 23:41
  **/
 public class BeanDefinitionStoreException extends BeansException {
 

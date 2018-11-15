@@ -4,7 +4,7 @@ import org.litespring.beans.BeansException;
 
 /**
  * @author yunfy
- * @create 2018-11-15 1:39
+ * @create 2018-11-15 23:39
  **/
 public class BeanCreationException extends BeansException {
     private String beanName;

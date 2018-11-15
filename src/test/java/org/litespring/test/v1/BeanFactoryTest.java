@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * @author yunfy
- * @create 2018-11-15 0:23
+ * @create 2018-11-15 22:23
  **/
 public class BeanFactoryTest {
     private DefalutBeanFactory factory = null;

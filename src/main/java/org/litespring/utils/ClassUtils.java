@@ -2,7 +2,7 @@ package org.litespring.utils;
 
 /**
  * @author yunfy
- * @create 2018-11-15 1:01
+ * @create 2018-11-15 23:01
  **/
 public abstract class ClassUtils {
 
