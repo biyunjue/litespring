@@ -1,27 +1,38 @@
 package org.litespring.test.v1;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.litespring.beans.BeanDefinition;
-import org.litespring.beans.BeansException;
 import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.BeanDefinitionStoreException;
-import org.litespring.beans.factory.BeanFactory;
 import org.litespring.beans.factory.support.DefalutBeanFactory;
+import org.litespring.beans.factory.xml.XmlBeanDefinitionReader;
 import org.litespring.service.v1.PetStoreService;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author yunfy
  * @create 2018-11-15 0:23
  **/
 public class BeanFactoryTest {
+    private DefalutBeanFactory factory = null;
+    private XmlBeanDefinitionReader reader = null;
+
+    @Before
+    public void setUP() {
+        //获取所有Bean的工厂类
+        factory = new DefalutBeanFactory();
+        //抽取一个专门的类用于解析xml，获取BeanDefinition
+        reader = new XmlBeanDefinitionReader(factory);
+    }
 
     @Test
     public void testGetBean() {
-        //获取所有Bean的工厂类
-        BeanFactory factory = new DefalutBeanFactory("petstore-v1.xml");
+        //注册一个BeanDefinition
+        reader.loadBeanDefinitions("petstore-v1.xml");
         //获取某个Bean的定义
         BeanDefinition bd = factory.getBeanDefinition("petStore");
         //断言获取的类名是xml中的类名
@@ -34,7 +45,8 @@ public class BeanFactoryTest {
 
     @Test
     public void testInvalidBean() {
-        BeanFactory factory = new DefalutBeanFactory("petstore-v1.xml");
+        //注册一个BeanDefinition
+        reader.loadBeanDefinitions("petstore-v1.xml");
         try {
             factory.getBean("invalidBean");
         } catch (BeanCreationException ex) {
@@ -46,7 +58,8 @@ public class BeanFactoryTest {
     @Test
     public void testInvalidXml() {
         try {
-            new DefalutBeanFactory("xxx-v1.xml");
+            //注册一个BeanDefinition
+            reader.loadBeanDefinitions("xxx-v1.xml");
         } catch (BeanDefinitionStoreException ex) {
             return;
         }
