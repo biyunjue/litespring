@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.context.ApplicationContext;
 import org.litespring.context.support.ClassPathXmlApplicationContext;
+import org.litespring.context.support.FileSystemXmlApplicationContext;
 import org.litespring.service.v1.PetStoreService;
 
 /**
@@ -13,8 +14,15 @@ import org.litespring.service.v1.PetStoreService;
 public class ApplicationContextTest {
 
     @Test
-    public void testGetBean() {
+    public void testGetBeanByClassPath() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("petstore-v1.xml");
+        PetStoreService petStore = (PetStoreService) ctx.getBean("petStore");
+        Assert.assertNotNull(petStore);
+    }
+
+    @Test
+    public void testGetBeanByFileSystem() {
+        ApplicationContext ctx = new FileSystemXmlApplicationContext("D:\\study\\projects\\litespring\\src\\test\\resources\\petstore-v1.xml");
         PetStoreService petStore = (PetStoreService) ctx.getBean("petStore");
         Assert.assertNotNull(petStore);
     }
