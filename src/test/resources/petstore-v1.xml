@@ -7,5 +7,8 @@
     <bean id="petStore"
           class="org.litespring.service.v1.PetStoreService">
     </bean>
+    <bean id="appleStore"
+          class="org.litespring.service.v1.AppleStoreService" scope="prototype">
+    </bean>
 
 </beans>

@@ -12,9 +12,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author yunfy
  * @create 2018-11-15 22:52
  **/
-public class DefalutBeanFactory implements ConfigurablebeanFactory, BeanDefinitionRegistry {
+public class DefalutBeanFactory extends DefaultSingletonBeanRegistry
+        implements ConfigurablebeanFactory, BeanDefinitionRegistry {
 
-    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
+    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(64);
 
     private ClassLoader beanClassLoader;
 
@@ -49,6 +50,25 @@ public class DefalutBeanFactory implements ConfigurablebeanFactory, BeanDefiniti
         if (bd == null) {
             throw new BeanCreationException("Bean Definition does not exist");
         }
+        if (bd.isSingleton()) {
+            Object bean = this.getSingleton(beanID);
+            if (bean == null) {
+                bean = createBean(bd);
+                this.registerSingleton(beanID, bean);
+            }
+            return bean;
+        }
+        return createBean(bd);
+
+    }
+
+    /**
+     * 根据BeanDefinition创建bean
+     *
+     * @param bd bean的定义
+     * @return
+     */
+    private Object createBean(BeanDefinition bd) {
         ClassLoader cl = this.getBeanClassLoader();
         String beanClassName = bd.getBeanClassName();
         try {

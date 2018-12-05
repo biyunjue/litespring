@@ -9,10 +9,10 @@ import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.support.DefalutBeanFactory;
 import org.litespring.beans.factory.xml.XmlBeanDefinitionReader;
 import org.litespring.core.io.ClassPathResource;
+import org.litespring.service.v1.AppleStoreService;
 import org.litespring.service.v1.PetStoreService;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * @author yunfy
@@ -31,17 +31,45 @@ public class BeanFactoryTest {
     }
 
     @Test
-    public void testGetBean() {
+    public void testGetSingletonBean() {
         //注册一个BeanDefinition
         reader.loadBeanDefinitions(new ClassPathResource("petstore-v1.xml"));
         //获取某个Bean的定义
         BeanDefinition bd = factory.getBeanDefinition("petStore");
+        //单例模式
+        assertTrue(bd.isSingleton());
+        assertFalse(bd.isPrototype());
+        assertEquals(BeanDefinition.SCOPE_DEFAULT, bd.getScope());
         //断言获取的类名是xml中的类名
         assertEquals("org.litespring.service.v1.PetStoreService", bd.getBeanClassName());
         //获取类
         PetStoreService petStoreService = (PetStoreService) factory.getBean("petStore");
         //断言类不为空
         assertNotNull(petStoreService);
+        //再次获取
+        PetStoreService petStoreService1 = (PetStoreService) factory.getBean("petStore");
+        assertEquals(petStoreService, petStoreService1);
+    }
+
+    @Test
+    public void testGetPrototypeBean() {
+        //注册一个BeanDefinition
+        reader.loadBeanDefinitions(new ClassPathResource("petstore-v1.xml"));
+        //获取某个Bean的定义
+        BeanDefinition bd = factory.getBeanDefinition("appleStore");
+        //单例模式
+        assertTrue(bd.isPrototype());
+        assertFalse(bd.isSingleton());
+        assertEquals(BeanDefinition.SCOPE_PROTOTYPE, bd.getScope());
+        //断言获取的类名是xml中的类名
+        assertEquals("org.litespring.service.v1.AppleStoreService", bd.getBeanClassName());
+        //获取类
+        AppleStoreService appleStoreService = (AppleStoreService) factory.getBean("appleStore");
+        //断言类不为空
+        assertNotNull(appleStoreService);
+        //再次获取
+        AppleStoreService appleStoreService1 = (AppleStoreService) factory.getBean("appleStore");
+        assertNotEquals(appleStoreService, appleStoreService1);
     }
 
     @Test
