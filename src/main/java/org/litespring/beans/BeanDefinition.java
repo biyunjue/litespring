@@ -1,5 +1,7 @@
 package org.litespring.beans;
 
+import java.util.List;
+
 /**
  * @author yunfy
  * @create 2018-11-15 22:53
@@ -43,4 +45,11 @@ public interface BeanDefinition {
      * @param scope
      */
     void setScope(String scope);
+
+    /**
+     * 获取bean的属性集合
+     *
+     * @return
+     */
+    List<PropertyValue> getPropertyValues();
 }
