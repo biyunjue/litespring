@@ -11,7 +11,7 @@ import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.config.RuntimeBeanReference;
 import org.litespring.beans.factory.config.TypedStringValue;
 import org.litespring.beans.factory.support.BeanDefinitionRegistry;
-import org.litespring.beans.factory.support.DefalutBeanDefinition;
+import org.litespring.beans.factory.support.DefaultBeanDefinition;
 import org.litespring.core.io.Resource;
 import org.litespring.utils.StringUtils;
 
@@ -61,7 +61,7 @@ public class XmlBeanDefinitionReader {
                 Element ele = (Element) iterator.next();
                 String id = ele.attributeValue(ID_ATTRIBUTE);
                 String beanClassName = ele.attributeValue(CLASS_ATTRIBUTE);
-                BeanDefinition bd = new DefalutBeanDefinition(id, beanClassName);
+                BeanDefinition bd = new DefaultBeanDefinition(id, beanClassName);
                 if (ele.attributeValue(SCOPE_ATTRIBUTE) != null) {
                     bd.setScope(ele.attributeValue(SCOPE_ATTRIBUTE));
                 }

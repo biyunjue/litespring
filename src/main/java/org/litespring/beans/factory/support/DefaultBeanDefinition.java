@@ -10,7 +10,7 @@ import java.util.List;
  * @author yunfy
  * @create 2018-11-15 23:23
  **/
-public class DefalutBeanDefinition implements BeanDefinition {
+public class DefaultBeanDefinition implements BeanDefinition {
 
     private String id;
     private String beanClassName;
@@ -18,9 +18,9 @@ public class DefalutBeanDefinition implements BeanDefinition {
     private boolean prototype = false;
     private String scope = SCOPE_DEFAULT;
 
-    List<PropertyValue> propertyValues = new ArrayList<>();
+    private List<PropertyValue> propertyValues = new ArrayList<>();
 
-    public DefalutBeanDefinition(String id, String beanClassName) {
+    public DefaultBeanDefinition(String id, String beanClassName) {
         this.id = id;
         this.beanClassName = beanClassName;
     }

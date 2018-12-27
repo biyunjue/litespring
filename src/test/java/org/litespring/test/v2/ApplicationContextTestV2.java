@@ -5,6 +5,7 @@ import org.litespring.context.ApplicationContext;
 import org.litespring.context.support.ClassPathXmlApplicationContext;
 import org.litespring.service.v2.PetStoreService;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -20,5 +21,6 @@ public class ApplicationContextTestV2 {
         assertNotNull(petStoreService.getAccountDao());
         assertNotNull(petStoreService.getItemDao());
 
+        assertEquals("yunfy", petStoreService.getOwner());
     }
 }

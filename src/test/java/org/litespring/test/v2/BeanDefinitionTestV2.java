@@ -5,15 +5,13 @@ import org.junit.Test;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.PropertyValue;
 import org.litespring.beans.factory.config.RuntimeBeanReference;
-import org.litespring.beans.factory.support.DefalutBeanFactory;
+import org.litespring.beans.factory.support.DefaultBeanFactory;
 import org.litespring.beans.factory.xml.XmlBeanDefinitionReader;
 import org.litespring.core.io.ClassPathResource;
 
 import java.util.List;
-import java.util.Objects;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author yunfy
@@ -23,12 +21,12 @@ public class BeanDefinitionTestV2 {
 
     @Test
     public void testGetBeanDefinition() {
-        DefalutBeanFactory factory = new DefalutBeanFactory();
+        DefaultBeanFactory factory = new DefaultBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         reader.loadBeanDefinitions(new ClassPathResource("petstore-v2.xml"));
         BeanDefinition bd = factory.getBeanDefinition("petStore");
         List<PropertyValue> pvs = bd.getPropertyValues();
-        assertTrue(Objects.equals(pvs.size(), 2));
+        assertEquals(2, pvs.size());
         {
             PropertyValue pv = this.getPropertyValue("accountDao", pvs);
             assertNotNull(pv);

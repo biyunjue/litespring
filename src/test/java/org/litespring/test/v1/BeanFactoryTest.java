@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.BeanDefinitionStoreException;
-import org.litespring.beans.factory.support.DefalutBeanFactory;
+import org.litespring.beans.factory.support.DefaultBeanFactory;
 import org.litespring.beans.factory.xml.XmlBeanDefinitionReader;
 import org.litespring.core.io.ClassPathResource;
 import org.litespring.service.v1.AppleStoreService;
@@ -19,13 +19,13 @@ import static org.junit.Assert.*;
  * @create 2018-11-15 22:23
  **/
 public class BeanFactoryTest {
-    private DefalutBeanFactory factory = null;
+    private DefaultBeanFactory factory = null;
     private XmlBeanDefinitionReader reader = null;
 
     @Before
     public void setUP() {
         //获取所有Bean的工厂类
-        factory = new DefalutBeanFactory();
+        factory = new DefaultBeanFactory();
         //抽取一个专门的类用于解析xml，获取BeanDefinition
         reader = new XmlBeanDefinitionReader(factory);
     }

@@ -9,6 +9,7 @@
 
         <property name="accountDao" ref="accountDao"/>
         <property name="itemDao" ref="itemDao"/>
+        <property name="owner" value="yunfy"/>
 
     </bean>
 
