@@ -22,5 +22,7 @@ public class ApplicationContextTestV2 {
         assertNotNull(petStoreService.getItemDao());
 
         assertEquals("yunfy", petStoreService.getOwner());
+        assertEquals(2, petStoreService.getVersion());
+
     }
 }

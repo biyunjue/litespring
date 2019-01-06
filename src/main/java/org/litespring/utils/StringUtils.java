@@ -1,7 +1,7 @@
 package org.litespring.utils;
 
 /**
- * @author hejian
+ * @author yunfy
  */
 public abstract class StringUtils {
 

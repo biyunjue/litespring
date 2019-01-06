@@ -4,7 +4,7 @@ package org.litespring.utils;
  * @author yunfy
  * @create 2018-11-19 23:24
  **/
-public class Assert {
+public abstract class Assert {
     /**
      * Assert that an object is not {@code null} .
      *
