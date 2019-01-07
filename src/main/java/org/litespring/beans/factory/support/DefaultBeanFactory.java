@@ -1,5 +1,6 @@
 package org.litespring.beans.factory.support;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.PropertyValue;
 import org.litespring.beans.SimpleTypeConverter;
@@ -72,7 +73,7 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
         //创建实例
         Object bean = instantiateBean(bd);
         //组装属性
-        populateBean(bd, bean);
+        populateBeanWithBeanutils(bd, bean);
         return bean;
     }
 
@@ -112,6 +113,8 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
             PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+
+
             for (PropertyValue pv : propertyValues) {
                 String propertyName = pv.getName();
                 Object originalValue = pv.getValue();
@@ -125,6 +128,37 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
                         break;
                     }
                 }
+            }
+        } catch (Exception ex) {
+
+            throw new BeanCreationException("Failed to obtain BeanInfo for class [" + bd.getBeanClassName() + "]", ex);
+        }
+    }
+
+
+    /**
+     * 组装属性
+     *
+     * @param bd
+     * @param bean
+     */
+    private void populateBeanWithBeanutils(BeanDefinition bd, Object bean) {
+        //得到需要set的属性
+        List<PropertyValue> propertyValues = bd.getPropertyValues();
+        if (propertyValues == null || propertyValues.isEmpty()) {
+            return;
+        }
+        //使用java内省
+        BeanDefinitionValueResolver resolver = new BeanDefinitionValueResolver(this);
+        try {
+
+            for (PropertyValue pv : propertyValues) {
+                String propertyName = pv.getName();
+                Object originalValue = pv.getValue();
+                //转化成需要的真实实例
+                Object resolvedValue = resolver.resolveValueIfNecessary(originalValue);
+                //需要调用bean的set方法
+                BeanUtils.setProperty(bean, propertyName, resolvedValue);
             }
         } catch (Exception ex) {
 
