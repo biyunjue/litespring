@@ -12,6 +12,13 @@ public interface BeanDefinition {
     String SCOPE_DEFAULT = "";
 
     /**
+     * 获取bean的ID
+     *
+     * @return
+     */
+    String getID();
+
+    /**
      * 获取bean的类名称
      *
      * @return
@@ -52,4 +59,19 @@ public interface BeanDefinition {
      * @return
      */
     List<PropertyValue> getPropertyValues();
+
+    /**
+     * bean构造属性集合
+     *
+     * @return
+     */
+    ConstructorArgument getConstructorArgument();
+
+
+    /**
+     * 判断是否有构造属性
+     *
+     * @return
+     */
+    boolean hasConstructorArgumentValues();
 }
