@@ -8,7 +8,7 @@ import org.litespring.beans.factory.BeanFactory;
  * @author yunfy
  * @create 2018-12-05 23:02
  **/
-public interface ConfigurablebeanFactory extends BeanFactory {
+public interface ConfigurableBeanFactory extends BeanFactory {
     /**
      * set class loader
      *

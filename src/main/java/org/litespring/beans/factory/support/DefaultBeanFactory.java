@@ -5,7 +5,7 @@ import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.PropertyValue;
 import org.litespring.beans.SimpleTypeConverter;
 import org.litespring.beans.factory.BeanCreationException;
-import org.litespring.beans.factory.config.ConfigurablebeanFactory;
+import org.litespring.beans.factory.config.ConfigurableBeanFactory;
 import org.litespring.utils.ClassUtils;
 
 import java.beans.BeanInfo;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @create 2018-11-15 22:52
  **/
 public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
-        implements ConfigurablebeanFactory, BeanDefinitionRegistry {
+        implements ConfigurableBeanFactory, BeanDefinitionRegistry {
 
     private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(64);
 
